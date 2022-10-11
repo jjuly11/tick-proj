@@ -1,5 +1,13 @@
 extends layout
+include mixins/_tickets
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h3= title 
+  hr
+  .outer_wrapper
+    .ticket_wrapper
+      h3 Events 
+        a(href="#") (See More):
+      +ticket() 
+        
+

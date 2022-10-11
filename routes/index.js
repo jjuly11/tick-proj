@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
+const { route }= require('../app');
+var controller= require('../controllers/eventController');
+
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get('/', controller.homePage);
+
 
 module.exports = router;
