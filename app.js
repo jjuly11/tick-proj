@@ -1,3 +1,4 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -6,6 +7,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const mongoose= require('mongoose');
 
 var app = express();
 
@@ -30,6 +32,12 @@ app.use((req,res,next) =>{
   res.locals.url = req.path;
   next();
 });
+
+// Config Mongo DB
+mongoose.connect(process.env.DB);
+mongoose.Promise= global.Promise;
+mongoose.connection.on('error', (error) => console.error(error.message));
+
 
 // error handler
 app.use(function(err, req, res, next) {
