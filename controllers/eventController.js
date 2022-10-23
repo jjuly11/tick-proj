@@ -16,21 +16,29 @@ const storage = multer.diskStorage({});
 const upload = multer({storage});
 exports.upload= upload.single('image');
 
-exports.pushToCloudinary= async (req,res,next) =>{
+exports.pushToCloudinary = async (req,res,next) => {
+     
     try{
-        
         if(req.file){
-            // res.send(await cloudinary.uploader.upload(req.file.path));
-            const result = await cloudinary.uploader.upload(req.file.path)
-            .then((result)=>{
+            
+            await cloudinary.uploader.upload(req.file.path)
+            .then((result) => {
+                console.log(result);    
                 req.body.image= result.public_id;
+                // res.send(req.body.image);
                 next();
+            }).catch(() => {
+                req.flash('error', 'Sorry there was a problem uploading your image, please try again');
+                res.redirect('/admin/add');
             });
             
+        }else{
+            next();
         }
-    }catch(error){
-        next(error);
+    }catch(err){
+        next(err);
     }
+    
 }
 
 exports.filteredHomePage = async (req,res,next)=> {
@@ -64,6 +72,7 @@ exports.addEventGet= async (req,res,next) => {
 
 exports.addEventPost= async (req,res,next) => {
     try{
+        console.log("Enter Add Event");
         const event = new Event(req.body);
         await event.save();
         req.flash('success', `Event ${event.event_name} created successfully`);

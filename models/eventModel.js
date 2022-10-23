@@ -43,7 +43,7 @@ const eventSchema= new mongoose.Schema({
 
 eventSchema.index({
     event_name: 'text',
-    
-});
+    country: 'text'
+})
 
 module.exports = mongoose.model('Event', eventSchema);

@@ -4,17 +4,37 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const passport= require('passport');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const mongoose= require('mongoose');
+
+
 // For Flash Messages
 const flash= require('connect-flash');
 
 var app = express();
 
+// Configure passport start
+// app.use(passport.initialize());
+// app.use(passport.session());
+// passport.use(User.createStrategy());
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
+// Configure passport end
+
 // For Flash Message
 app.use(flash());
+
+// Custom middleware Start
+app.use( (req,res,next) => {
+  res.locals.user = req.user;
+  res.locals.url = req.path;
+  // res.locals.flash = req.flash();
+  next();
+} );
+// Custom middleware end
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
