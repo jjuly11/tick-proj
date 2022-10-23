@@ -1,7 +1,15 @@
 const { render }= require('../app');
 const multer = require('multer');
 const Event = require('../models/eventModel');
-const cloudinary = require('./cloudinary_config');
+// const cloudinary = require('./cloudinary_config');
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API,
+    api_secret: process.env.CLOUDINARY_API_SECRETS
+});
+
 
 // Images Upload with cloudinary
 const storage = multer.diskStorage({});
@@ -10,12 +18,15 @@ exports.upload= upload.single('image');
 
 exports.pushToCloudinary= async (req,res,next) =>{
     try{
+        
         if(req.file){
+            // res.send(await cloudinary.uploader.upload(req.file.path));
             const result = await cloudinary.uploader.upload(req.file.path)
             .then((result)=>{
                 req.body.image= result.public_id;
                 next();
             });
+            
         }
     }catch(error){
         next(error);
