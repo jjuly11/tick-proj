@@ -8,8 +8,13 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const mongoose= require('mongoose');
+// For Flash Messages
+const flash= require('connect-flash');
 
 var app = express();
+
+// For Flash Message
+app.use(flash());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -13,9 +13,9 @@ const eventSchema= new mongoose.Schema({
         trim: true 
     },
     image: String,
-    starting_time: {
+    sale_end_time: {
         type: Number,
-        required: 'Starting time is required',
+        required: 'Sale end time is required, how long will the tickets be available',
         max: 6
     },
     ticket_cost: {
@@ -25,7 +25,7 @@ const eventSchema= new mongoose.Schema({
     },
     quantity: {
         type: Number,
-        required: 'quantity is required',
+        required: 'quantity is required, how many tickets remain',
         max: 6
 
     },
@@ -34,6 +34,10 @@ const eventSchema= new mongoose.Schema({
         required: 'Country Name is Required',
         max: 64,
         trim: true
+    },
+    availability: {
+        type: Boolean,
+        required: 'Availability is required'
     }
 });
 

@@ -1,0 +1,34 @@
+mixin form()
+
+    .form_container 
+        form(action="" method="POST" enctype="multipart/form-data")
+            .formInput  
+                label(for="event_name") Event Name:  
+                input(type="text" name="event_name" quantity)
+            .formInput 
+                label(for="sale_end_time") Sale End Time:
+                input(type="date" name="sale_end_time" required )
+            .formInput 
+                label(for="ticket_cost") Ticket Cost 
+                input(type="number", name="ticket_cost" required)
+            .formInput 
+                label(for="quantity") Quantity: 
+                input(type="number" name="quantity" required)
+            .formInput 
+                label(for="country") Country: 
+                input(type="text" name="country" required)
+            .formInput 
+                label(for="event_description") Event Description: 
+                textarea(type="text" name="event_description" cols="50" rows="10")
+            .formInput 
+                label(for="availability") Event Available: 
+                input(type="radio", name="availability" value="true" checked)
+                label(for="availibility") Event Unavailable:
+                input(type="radio", name="availability" value="false") 
+            .formInput 
+                label(for="image") Upload Images: 
+                input(type="file" name="image" required)
+            .formInput
+                button(type="submit") Submit
+
+
