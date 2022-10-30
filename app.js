@@ -9,12 +9,27 @@ const passport= require('passport');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const mongoose= require('mongoose');
+// Sessions
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 
 // For Flash Messages
 const flash= require('connect-flash');
 
 var app = express();
+
+// Sessions start
+app.use(session({
+  secret: process.env.SECRET,
+  saveUninitialized: false,
+  resave: false,
+  // saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.DB,
+  })
+}));
+// Session End
 
 // Configure passport start
 // app.use(passport.initialize());
@@ -31,7 +46,7 @@ app.use(flash());
 app.use( (req,res,next) => {
   res.locals.user = req.user;
   res.locals.url = req.path;
-  // res.locals.flash = req.flash();
+  res.locals.flash = req.flash();
   next();
 } );
 // Custom middleware end

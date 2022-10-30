@@ -6,7 +6,7 @@ const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_NAME,
-    api_key: process.env.CLOUDINARY_API,
+    api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRETS
 });
 
@@ -27,7 +27,8 @@ exports.pushToCloudinary = async (req,res,next) => {
                 req.body.image= result.public_id;
                 // res.send(req.body.image);
                 next();
-            }).catch(() => {
+            }).catch((err) => {
+                // console.log(err);
                 req.flash('error', 'Sorry there was a problem uploading your image, please try again');
                 res.redirect('/admin/add');
             });
@@ -45,7 +46,7 @@ exports.filteredHomePage = async (req,res,next)=> {
     // res.send(process.env.DB);
     try{
         const allEvents = await Event.find({ avalablity: {$eq:true} });
-        res.render('index', {title:'HomePage'});
+        res.render('index', {title:'HomePage', allEvents});
     }catch(error){
         next(error);
     }
@@ -79,5 +80,15 @@ exports.addEventPost= async (req,res,next) => {
         res.redirect('/');
     }catch(error){
         next(error);
+    }
+}
+
+exports.allEvents= async (req,res,next) => {
+    try{
+        const events= await Event.find({ availability: {$eq: true}});
+        // res.json(events);
+        res.render('all_events', {title: 'All Available Events', events});
+    }catch(err){
+        next(err);
     }
 }

@@ -8,6 +8,7 @@ block content
     .ticket_wrapper
       h3 Events 
         a(href="#") (See More):
-      +ticket() 
+      each event in allEvents
+        +ticket(event) 
         
 

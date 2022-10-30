@@ -1,0 +1,10 @@
+extends layout
+include mixins/_tickets 
+
+block content
+    h2= title 
+    
+    each event in events
+        .eventWrapper
+        //- h1= event.event_name
+        +ticket(event) 
