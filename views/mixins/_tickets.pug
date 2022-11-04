@@ -8,6 +8,6 @@ mixin ticket(event={})
             //- if url.startsWith('/all')
             a(href="#")
                 h3= event.event_name 
-            p= `Description ${event.description}`
+            p= `Description ${event.event_description}`
             p= `Sale Ends: ${event.sale_end_time}`
             p= `Cost:$ ${event.ticket_cost}`  

@@ -12,6 +12,12 @@ const eventSchema= new mongoose.Schema({
         required: 'Event Host name is required',
         trim: true 
     },
+    event_description: {
+        type: String,
+        required: "Event Description is required",
+        max: 4124,
+        trim: true 
+    },
     age_restricted: {
         type: Boolean,
         required: 'Age Restriction is required'
@@ -22,8 +28,53 @@ const eventSchema= new mongoose.Schema({
         max: 128,
         trim: true 
     },
+    type_of_ticket:{
+        type: Array,
+        required: "Ticket Type Must Be Selected"
+    },
+    general_admission: {
+        type: Number,
+        max: 1024,
+        trim: true
+    },
+    vip: {
+        type: Number,
+        max: 1024,
+        trim: true
+    },
+    reserved_seating:{
+        type: Number,
+        max: 1024,
+        trim: true
+    },
+    multi_day_pass:{
+        type: Number,
+        max: 1024,
+        trim: true
+    },
+    early_bird_discount:{
+        type: Number,
+        max: 1024,
+        trim: true
+    },
+    coded_discount: {
+        type: Number,
+        max: 1024,
+        trim: true
+    },
+    tickets_at_door: {
+        type: Number,
+        max: 1024,
+        trim: true
+    },
+    one_day_pass: {
+        type: Number,
+        max: 1024,
+        trim: true
+    },
     venue_address: {
         type: String,
+        required: "Venue Address is required",
         max:128,
         trim: true 
     },
@@ -46,12 +97,12 @@ const eventSchema= new mongoose.Schema({
         required: 'Ticket Cost is required',
         max: 20000000
     },
-    quantity: {
-        type: Number,
-        required: 'quantity is required, how many tickets remain',
-        max: 200000
+    // quantity: {
+    //     type: Number,
+    //     required: 'quantity is required, how many tickets remain',
+    //     max: 200000
 
-    },
+    // },
     country: {
         type: String,
         required: 'Country Name is Required',
