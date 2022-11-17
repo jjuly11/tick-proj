@@ -1,0 +1,11 @@
+mixin login_form()
+    .login_form_cls 
+        form(method="post")
+            .form_input 
+                label(for="username") Username:  
+                input(type="text" name="username")
+            .form_input     
+                label(for="password") Password: 
+                input(type="password" name="password")
+            .form_input 
+                button(type="submit") Submit   

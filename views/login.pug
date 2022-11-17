@@ -1,0 +1,7 @@
+extends layout 
+include mixins/_login_sign_up 
+
+block content 
+    h2= title
+
+    +login_form()

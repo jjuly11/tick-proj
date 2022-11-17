@@ -7,6 +7,9 @@ var controller= require('../controllers/eventController');
 /* GET home page. */
 router.get('/', controller.filteredHomePage);
 
+// Login 
+router.get('/login', controller.login);
+
 // Admin Section Routes
 router.get('/admin', controller.adminSection);
 router.get('/add_event', controller.addEventGet);

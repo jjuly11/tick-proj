@@ -92,3 +92,13 @@ exports.allEvents= async (req,res,next) => {
         next(err);
     }
 }
+
+// Login Section
+
+exports.login= async (req, res,next ) => {
+    try{
+        res.render('login', {title: 'Login'});
+    }catch(err){
+        next(err);
+    }
+}
