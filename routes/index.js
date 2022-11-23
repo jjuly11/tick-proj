@@ -2,13 +2,15 @@ var express = require('express');
 var router = express.Router();
 const { route }= require('../app');
 var controller= require('../controllers/eventController');
+const userController= require('../controllers/userController');
 
 
 /* GET home page. */
 router.get('/', controller.filteredHomePage);
 
 // Login 
-router.get('/login', controller.login);
+router.get('/login', userController.login);
+router.get('/sign-up', userController.signup);
 
 // Admin Section Routes
 router.get('/admin', controller.adminSection);
