@@ -14,11 +14,25 @@ exports.login= async (req, res,next ) => {
         next(err);
     }
 }
+exports.loginPost= async (req,res,next) => {
+    try{
+
+    }catch(err){
+        next(err);
+    }
+}
 
 // Signup Section
 exports.signup= async (req,res,next) => {
     try{
         res.render('signup', {title: 'Sign-Up'});
+    }catch(err){
+        next(err);
+    }
+}
+exports.siginUpPost= async (req,res,next) => {
+    try{
+
     }catch(err){
         next(err);
     }
