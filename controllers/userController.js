@@ -49,6 +49,6 @@ exports.siginUpPost = [
     sanitize('*').trim().escape(),
 
     (req, res, next) => {
-        
+        const errors = 
     }
 ]
