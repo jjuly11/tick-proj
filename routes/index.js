@@ -11,6 +11,7 @@ router.get('/', controller.filteredHomePage);
 // Login 
 router.get('/login', userController.login);
 router.get('/sign-up', userController.signup);
+router.post('/sing-up', userController.siginUpPost);
 
 // Admin Section Routes
 router.get('/admin', controller.adminSection);

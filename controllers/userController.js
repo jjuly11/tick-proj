@@ -49,6 +49,22 @@ exports.siginUpPost = [
     sanitize('*').trim().escape(),
 
     (req, res, next) => {
-        const errors = 
+        const errors = validationResult(req);
+        if(!errors.isEmpty){
+            res.render('signup', {title: 'Please Fix the following errors'});
+            return;
+        }else{
+            // No Errors
+            const newUser= new User(req.body);
+            User.register(newUser, req.body.password, function(error){
+                if(error){
+                    console.log('error while registering', error);
+                    return next(error);
+                }
+                next();
+                
+            });
+
+        }
     }
 ]
