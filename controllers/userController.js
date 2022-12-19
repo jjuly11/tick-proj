@@ -4,7 +4,7 @@ const URLSearchParams= require('url-search-params');
 const Event= require('../models/eventModel');
 
 const { check, validationResult } = require('express-validator/check');
-const {santize, sanitize} = require('express-validator/filter');
+const {sanitize} = require('express-validator/filter');
 // const { findByIdAndUpdate } = 
 const compression = require('compression');
 
@@ -51,7 +51,7 @@ exports.siginUpPost = [
     (req, res, next) => {
         const errors = validationResult(req);
         if(!errors.isEmpty){
-            res.render('signup', {title: 'Please Fix the following errors'});
+            res.render('signup', {title: 'Please Fix the following errors', errors: errors.array()});
             return;
         }else{
             // No Errors
