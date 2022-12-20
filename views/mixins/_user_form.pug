@@ -1,19 +1,19 @@
 mixin userForm(user={})
-    form(action="", method="post") 
+    form(action="", method="POST") 
         .form_input 
             label(for="first_name") First Name: 
-            input(type="text", name="first_name")
+            input(type="text" required name="first_name" id="first_name")
         .form_input 
             label(for="surname") Last Name: 
-            input(type="text", name="surname") 
+            input(type="text" required name="surname" id="surname") 
         .form_input 
             label(for="email") Email: 
-            input(type="email", name="email") 
+            input(type="email" required name="email" id="email") 
         .form_input 
             label(for="password") Password: 
-            input(type="password", name="password")
+            input(type="password" required name="password" id="password")
         .form_input 
             label(for="confirm_password") Confirm Password: 
-            input(type="password", name="confirm_password")
+            input(type="password" required name="confirm_password" id="confirm_password")
         .form_input
             button(type="submit") Confirm

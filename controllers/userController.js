@@ -19,7 +19,7 @@ exports.login= async (req, res,next ) => {
 }
 exports.loginPost= async (req,res,next) => {
     try{
-
+        console.log('In Login Post');
     }catch(err){
         next(err);
     }
@@ -28,33 +28,32 @@ exports.loginPost= async (req,res,next) => {
 // Signup Section
 exports.signup= async (req,res,next) => {
     try{
+        console.log('Rendering Page...');
         res.render('signup', {title: 'Sign-Up'});
     }catch(err){
         next(err);
     }
 }
-exports.siginUpPost = [
+exports.signUpPost = [
     check('first_name').isLength({min: 1}).withMessage('First Name Must Be Specified')
     .isAlphanumeric().withMessage('First Name must be alphanumeric'),
-    
     check('surname').isLength({ min:1 }).withMessage('Last Name Must be Specified')
     .isAlphanumeric().withMessage('Last Name Must be Alphanumeric'),
-    
     check('email').isEmail().withMessage('Invalid Email'),
-
     check('password').isLength({min:8}).withMessage('Password Must Be 8 characters long'),
-
     check('confirm_password').custom((value, {req}) => value === req.body.password ).withMessage('Password Does not match'),
-
     sanitize('*').trim().escape(),
 
     (req, res, next) => {
+        console.log('Enter SignupPost Function/method');
         const errors = validationResult(req);
         if(!errors.isEmpty){
+            console.log('Error Occured');
             res.render('signup', {title: 'Please Fix the following errors', errors: errors.array()});
             return;
         }else{
             // No Errors
+            console.log('Registering User');
             const newUser= new User(req.body);
             User.register(newUser, req.body.password, function(error){
                 if(error){
@@ -62,7 +61,6 @@ exports.siginUpPost = [
                     return next(error);
                 }
                 next();
-                
             });
 
         }
