@@ -3,7 +3,7 @@ const User= require("../models/userModel");
 const URLSearchParams= require('url-search-params');
 const Event= require('../models/eventModel');
 
-const { check, validationResult } = require('express-validator/check');
+const { check, validationResult } = require('express-validator');
 const {sanitize} = require('express-validator/filter');
 // const { findByIdAndUpdate } = 
 const compression = require('compression');
@@ -47,13 +47,13 @@ exports.signUpPost = [
     (req, res, next) => {
         console.log('Enter SignupPost Function/method');
         const errors = validationResult(req);
-        if(!errors.isEmpty){
+        if(!errors.isEmpty()){
             console.log('Error Occured');
             res.render('signup', {title: 'Please Fix the following errors', errors: errors.array()});
             return;
         }else{
             // No Errors
-            console.log('Registering User');
+            console.log('Registering User, No errors');
             const newUser= new User(req.body);
             User.register(newUser, req.body.password, function(error){
                 if(error){
