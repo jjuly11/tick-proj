@@ -10,11 +10,13 @@ router.get('/', controller.filteredHomePage);
 
 // Login 
 router.get('/login', userController.login);
+router.post('/login', userController.loginPost);
 router.get('/sign-up', userController.signup);
 router.post('/sign-up', 
     userController.signUpPost,
     userController.loginPost
 );
+router.get('/logout', userController.logout);
 
 // Admin Section Routes
 router.get('/admin', controller.adminSection);

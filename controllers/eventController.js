@@ -45,8 +45,14 @@ exports.pushToCloudinary = async (req,res,next) => {
 exports.filteredHomePage = async (req,res,next)=> {
     // res.send(process.env.DB);
     try{
+        // if(req.isAuthenticated()){
+        //     res.send('Already Logged in');
+        // }else{
+        //     res.send('User Not Logged in');
+        // }
         const allEvents = await Event.find({ avalablity: {$eq:true} });
         res.render('index', {title:'HomePage', allEvents});
+        // req.flash('info');
     }catch(error){
         next(error);
     }

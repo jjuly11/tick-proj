@@ -8,10 +8,14 @@ html
       h2 
         a(href="/") Tickets 
       ul 
+        if !user
+          li 
+            a(href="/login") Login 
+          li 
+            a(href="/sign-up") Sign-up
         li 
-          a(href="/login") Login 
-        li 
-          a(href="/sign-up") Sign-up
+          a(href="/logout") Logout (#{user.first_name})
+      //- p=user
       .header_img 
           img(src="http://res.cloudinary.com/ddyffgmvq/image/upload/v1661096531/hnadxxns5gnkxtasluao.jpg", alt="header image")
     block content

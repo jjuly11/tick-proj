@@ -5,6 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const passport= require('passport');
+const User = require('./models/userModel');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -32,11 +33,11 @@ app.use(session({
 // Session End
 
 // Configure passport start
-// app.use(passport.initialize());
-// app.use(passport.session());
-// passport.use(User.createStrategy());
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 // Configure passport end
 
 // For Flash Message
@@ -45,6 +46,7 @@ app.use(flash());
 // Custom middleware Start
 app.use( (req,res,next) => {
   res.locals.user = req.user;
+  // console.log('req.user');
   res.locals.url = req.path;
   res.locals.flash = req.flash();
   next();

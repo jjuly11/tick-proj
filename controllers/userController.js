@@ -17,13 +17,26 @@ exports.login= async (req, res,next ) => {
         next(err);
     }
 }
-exports.loginPost= async (req,res,next) => {
-    try{
-        console.log('In Login Post');
-    }catch(err){
-        next(err);
-    }
-}
+exports.loginPost= Passport.authenticate('local', {
+    successRedirect: '/',
+    successFlash: 'You are now logged in',
+    failureRedirect: '/login',
+    failureFlash: 'Login Failed, Try Again'
+});
+// Didn't Work
+// exports.loginPost= (req,res) => {
+//     Passport.authenticate('local')(req,res, function () {
+//     User.find( {email: req.body.username}, 
+//         function (err,docs) {
+//             if(err){
+//                 console.log('Username not found');
+//             }else{
+//                 console.log('User Found');
+//                 req.flash('info','user found');
+//             }
+//         } );
+// });
+// }
 
 // Signup Section
 exports.signup= async (req,res,next) => {
@@ -66,3 +79,12 @@ exports.signUpPost = [
         }
     }
 ]
+exports.logout= (req,res,next) => {
+    req.logout(function(err){
+        if(err){
+            next(err);
+        }
+    });
+    req.flash('info', 'You Have been Logout');
+    res.redirect('/');
+} 
