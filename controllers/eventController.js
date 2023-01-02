@@ -98,3 +98,11 @@ exports.allEvents= async (req,res,next) => {
         next(err);
     }
 }
+
+exports.singleEventGet= async(req,res,next) => {
+    try{
+        res.render('single', {title: 'Single Event Page'});
+    }catch(err){
+        next(err);
+    }
+}

@@ -28,6 +28,7 @@ controller.addEventPost
 );
 
 router.get('/all', controller.allEvents);
+router.get('/single', controller.singleEventGet);
 
 
 module.exports = router;
