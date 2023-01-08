@@ -1,13 +1,13 @@
 mixin ticket(event={}) 
     .ticket
         .ticket_img 
-            a(href="#")
+            a(href=`/all/${event._id}`)
                 img.w-100(src=`http://res.cloudinary.com/ddyffgmvq/image/upload/${event.image}.jpg`, alt="ticket_image")
             hr 
         .ticket_info 
             //- if url.startsWith('/all')
             //- a.link-dark(href="/single/#{event._id}")
-            a.link-dark(href="/single")
+            a.link-dark(href=`/all/${event._id}`)
                 h3= event.event_name 
             p= `Description ${event.event_description}`
             p= `Sale Ends: ${event.sale_end_time}`

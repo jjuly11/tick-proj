@@ -101,7 +101,10 @@ exports.allEvents= async (req,res,next) => {
 
 exports.singleEventGet= async(req,res,next) => {
     try{
-        res.render('single', {title: 'Single Event Page'});
+        const eventParam= req.params.event;
+        const event= await Event.findOne({_id: eventParam});
+        // return;
+        res.render('single', {title: 'Single Event Page', event});
     }catch(err){
         next(err);
     }

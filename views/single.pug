@@ -1,4 +1,14 @@
 extends layout 
 
 block content 
-    h2= title
+    h2= title 
+
+    img.w-100(src=`http://res.cloudinary.com/ddyffgmvq/image/upload/v1661096531/${event.image}.jpg`, alt="Event Image")
+
+    .container 
+        h3= event.event_name
+        p= event.event_description 
+        p Address: #{event.venue_address}
+        p Country: #{event.country} 
+        p Sale Ends On: #{event.sale_end_time}
+
