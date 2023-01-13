@@ -1,11 +1,18 @@
 mixin login_form()
     .login_form_cls 
-        form(method="post")
-            .form_input 
-                label(for="username") Username/Email:  
-                input(type="email" name="email")
-            .form_input     
-                label(for="password") Password: 
-                input(type="password" name="password")
-            .form_input 
-                button(type="submit") Submit   
+        form.p-5(method="post")
+            .form_input.form-group.row 
+                .col-md-1 
+                label.col-md-3(for="username") Username/Email:  
+                input.col-md-6.p-1(type="email" id="username" name="email")
+            .form_input.form-group.row.mt-3 
+                .col-md-1 
+                label.col-md-3(for="password") Password: 
+                input.col-md-6.p-1(type="password" id="password" name="password")
+            .form_input.form-group.p-3.text-center  
+                button.btn.btn-dark.w-25.p-2(type="submit") Submit   
+
+//- Learning Moment
+//- mixin test()
+//-     .container 
+//-         p testing

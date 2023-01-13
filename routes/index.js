@@ -7,6 +7,8 @@ const userController= require('../controllers/userController');
 
 /* GET home page. */
 router.get('/', controller.filteredHomePage);
+router.get('/about', controller.aboutGet);
+router.get('/contact', controller.contactGet);
 
 // Login 
 router.get('/login', userController.login);

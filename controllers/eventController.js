@@ -57,6 +57,22 @@ exports.filteredHomePage = async (req,res,next)=> {
         next(error);
     }
 }
+
+exports.aboutGet = (req,res,next) => {
+    try{
+        res.render('about', {title: 'About Us'});
+    }catch(error){
+        next(error);
+    }
+}
+
+exports.contactGet = (req,res,next) => {
+    try{
+        res.render('contact', {title: 'Contact Us'});
+    }catch(err){
+        next(err);
+    }
+}
 // Admin Section Begins here
 exports.adminSection = (req,res,next) => {
     try{

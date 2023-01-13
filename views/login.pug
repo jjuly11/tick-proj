@@ -2,6 +2,9 @@ extends layout
 include mixins/_login_sign_up 
 
 block content 
-    h2= title
-
-    +login_form()
+    .container-fluid.overflow-hidden.login-banner.p-0
+        img.w-100(src='https://res.cloudinary.com/ddyffgmvq/image/upload/v1673634699/login_banner_zbexz7.jpg', alt="Login Header")
+    .container-fluid.bg-dark.text-light.p-3
+        h3.container= title
+    .container 
+        +login_form()

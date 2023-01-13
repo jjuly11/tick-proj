@@ -2,10 +2,13 @@ extends layout
 include mixins/_user_form 
 
 block content 
-    h2= title 
-    
-    if errors 
-        ul 
-            for error in errors 
-                li= error.msg
-    +userForm()
+    .container-fluid.overflow-hidden.login-banner.p-0
+        img.w-100(src='https://res.cloudinary.com/ddyffgmvq/image/upload/v1673634699/login_banner_zbexz7.jpg', alt="Login Header")
+    .container-fluid.bg-dark.text-light.p-3
+        h3.container= title
+    .container 
+        if errors 
+            ul 
+                for error in errors 
+                    li= error.msg
+        +userForm()

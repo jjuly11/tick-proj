@@ -1,19 +1,24 @@
 mixin userForm(user={})
-    form(action="", method="POST") 
-        .form_input 
-            label(for="first_name") First Name: 
-            input(type="text" required name="first_name" id="first_name")
-        .form_input 
-            label(for="surname") Last Name: 
-            input(type="text" required name="surname" id="surname") 
-        .form_input 
-            label(for="email") Email: 
-            input(type="email" required name="email" id="email") 
-        .form_input 
-            label(for="password") Password: 
-            input(type="password" required name="password" id="password")
-        .form_input 
-            label(for="confirm_password") Confirm Password: 
-            input(type="password" required name="confirm_password" id="confirm_password")
-        .form_input
-            button(type="submit") Confirm
+    form.p-4(action="", method="POST") 
+        .form_input.form-group.row.mt-3
+            .col-md-1
+            label.col-md-3(for="first_name") First Name: 
+            input.col-md-6.p-1(type="text" required name="first_name" id="first_name")
+        .form_input.form-group.row.mt-2
+            .col-md-1
+            label.col-md-3(for="surname") Last Name: 
+            input.col-md-6.p-1(type="text" required name="surname" id="surname") 
+        .form_input.form-group.row.mt-2
+            .col-md-1
+            label.col-md-3(for="email") Email: 
+            input.col-md-6.p-1(type="email" required name="email" id="email") 
+        .form_input.form-group.row.mt-2
+            .col-md-1
+            label.col-md-3(for="password") Password: 
+            input.col-md-6.p-1(type="password" required name="password" id="password")
+        .form_input.form-group.row.mt-2
+            .col-md-1
+            label.col-md-3(for="confirm_password") Confirm Password: 
+            input.col-md-6.p-1(type="password" required name="confirm_password" id="confirm_password")
+        .form_input.form-group.mt-3.text-center 
+            button.btn.btn-dark.p-2.w-25(type="submit") Sign Up!

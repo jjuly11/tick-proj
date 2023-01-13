@@ -2,8 +2,8 @@ extends layout
 include mixins/_tickets 
 
 block content
-    .container-fluid.text-center.bg-primary.text-light.p-3
-        h2= title 
+    .container-fluid.bg-dark.border-top.text-light.p-3
+        h3.container= title
     .container 
         each event in events
             .eventWrapper
