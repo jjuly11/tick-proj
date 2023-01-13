@@ -1,13 +1,14 @@
 extends layout 
 
 block content 
-    h2= title 
-
-    .options 
-        ul 
-            li
-                a(href="/add_event") Add Event 
-            li  
-                a(href="/list_events") List Events 
-            li 
-                a(href="/remove_event") Remove Events 
+    .container-fluid.text-center.bg-primary.text-light.p-3
+        h2= title 
+    .container 
+        .options 
+            ul 
+                li
+                    a(href="/add_event") Add Event 
+                li  
+                    a(href="/list_events") List Events 
+                li 
+                    a(href="/remove_event") Remove Events 

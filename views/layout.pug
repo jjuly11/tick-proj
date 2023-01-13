@@ -22,6 +22,8 @@ html
             a.nav-link(href="/about" aria-current="page") About 
           li.nav-item  
             a.nav-link(href="/contact" aria-current="page") Contact
+          li.nav-item  
+            a.nav-link(href="/all" aria-current="page") All_Events
           if !user
             li.nav-item 
               a.nav-link(href="/login") Login 
@@ -35,8 +37,4 @@ html
       form.d-flex
         input.form-control.me-2(type="search" placeholder="Search" aria-label="search")
         button.btn.btn-outline-light.me-3(type="submit") Search
-      
-    .container-fluid.overflow-hidden.px-0 
-      img(src="http://res.cloudinary.com/ddyffgmvq/image/upload/v1661096531/hnadxxns5gnkxtasluao.jpg" class="w-100" alt="header image")
-    .container 
-      block content
+    block content

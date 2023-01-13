@@ -2,13 +2,17 @@ extends layout
 include mixins/_tickets
 
 block content
-  h3= title 
+  .container-fluid.overflow-hidden.px-0 
+      img(src="http://res.cloudinary.com/ddyffgmvq/image/upload/v1661096531/hnadxxns5gnkxtasluao.jpg" class="w-100" alt="header image")
+  .container-fluid.text-center.bg-primary.text-light.p-3
+    h3= title 
   hr
-  .outer_wrapper
-    .ticket_wrapper
-      h3 Events 
-        a(href="/all") (See More):
-      each event in allEvents
-        +ticket(event) 
-        
+  .container 
+    .outer_wrapper
+      .ticket_wrapper
+        h3 Events 
+          //- a(href="/all") (See More):
+        each event in allEvents
+          +ticket(event) 
+          
 

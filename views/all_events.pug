@@ -2,9 +2,10 @@ extends layout
 include mixins/_tickets 
 
 block content
-    h2= title 
-    
-    each event in events
-        .eventWrapper
-        //- h1= event.event_name
-        +ticket(event) 
+    .container-fluid.text-center.bg-primary.text-light.p-3
+        h2= title 
+    .container 
+        each event in events
+            .eventWrapper
+            //- h1= event.event_name
+            +ticket(event) 

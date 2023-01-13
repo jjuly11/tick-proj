@@ -2,7 +2,8 @@ extends layout
 include mixins/_form
 
 block content
-    h2= title 
-
-    +form()
+    .container-fluid.text-center.bg-primary.text-light.p-3
+        h2= title 
+    .container 
+        +form()
 
