@@ -10,13 +10,13 @@ const eventSchema= new mongoose.Schema({
     event_host: {
         type: String,
         required: 'Event Host name is required',
-        trim: true 
+        trim: true
     },
     event_description: {
         type: String,
         required: "Event Description is required",
         max: 4124,
-        trim: true 
+        trim: true
     },
     age_restricted: {
         type: Boolean,
@@ -26,7 +26,15 @@ const eventSchema= new mongoose.Schema({
         type: String,
         required: "Venue Name is required",
         max: 128,
-        trim: true 
+        trim: true
+    },
+    event_starting_date:{
+      type: Date,
+      required: "starting date is required"
+    },
+    event_starting_time:{
+      type: String,
+      required: "starting time is required"
     },
     type_of_ticket:{
         type: Array,
@@ -76,7 +84,7 @@ const eventSchema= new mongoose.Schema({
         type: String,
         required: "Venue Address is required",
         max:128,
-        trim: true 
+        trim: true
     },
     ticket_types:{
         type: Array,
@@ -84,15 +92,50 @@ const eventSchema= new mongoose.Schema({
     event_description: {
         type: String,
         required: 'Event description is required',
-        trim: true 
+        trim: true
     },
     image: String,
-    sale_end_time: {
-        type: String,
-        required: 'Sale end time is required, how long will the tickets be available',
-        max: 6
+    // sale_end_time: {
+    //     type: String,
+    //     required: 'Sale end time is required, how long will the tickets be available',
+    //     max: 6
+    // },
+    coded_discount_cost: {
+        type: Number,
+        required: 'Ticket Cost is required',
+        max: 20000000
     },
-    ticket_cost: {
+    early_bird_discount_cost: {
+        type: Number,
+        required: 'Ticket Cost is required',
+        max: 20000000
+    },
+    multi_day_pass_cost: {
+        type: Number,
+        required: 'Ticket Cost is required',
+        max: 20000000
+    },
+    vip_cost: {
+        type: Number,
+        required: 'Ticket Cost is required',
+        max: 20000000
+    },
+    general_admission_cost: {
+        type: Number,
+        required: 'Ticket Cost is required',
+        max: 20000000
+    },
+    one_day_pass_cost: {
+        type: Number,
+        required: 'Ticket Cost is required',
+        max: 20000000
+    },
+    reserved_seating_cost: {
+        type: Number,
+        required: 'Ticket Cost is required',
+        max: 20000000
+    },
+    tickets_at_door_cost: {
         type: Number,
         required: 'Ticket Cost is required',
         max: 20000000
