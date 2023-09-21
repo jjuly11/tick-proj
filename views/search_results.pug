@@ -1,0 +1,9 @@
+extends layout 
+include mixins/_event_detail 
+
+block content 
+    h2= title 
+    
+    each event in searchData 
+        .event_wrapper 
+            +event(event, searchQuery)

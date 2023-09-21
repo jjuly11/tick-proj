@@ -33,4 +33,12 @@ router.get('/all', controller.allEvents);
 router.get('/all/:event', controller.singleEventGet);
 
 
+router.post('/results', controller.searchResults);
+router.get('/confirmation/:data', userController.bookingConfirmation);
+router.get('/order-placed/:data', userController.orderPlaced);
+router.get('/my-account', userController.myAccount);
+
+// Testing Routes
+router.get('/test', controller.event_test);
+
 module.exports = router;

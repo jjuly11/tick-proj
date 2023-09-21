@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+    h2= title 
+    
+    each event in result 
+        h3= event.event_name 
+        each ticket in event.tickets 
+            if ticket.available 
+                p= `Event Ticket Type: ${ticket.ticket_type}`
+                p= `Event Ticket Cost: \$${ticket.ticket_cost}`
+                p= `Event Ticket Quantity: ${ticket.ticket_amount}`

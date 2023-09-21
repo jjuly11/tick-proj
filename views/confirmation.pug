@@ -1,0 +1,7 @@
+extend layout 
+include mixins/_event_detail
+
+block content 
+    h2= title 
+    each i in event 
+        +event(i, parsedData)

@@ -1,36 +1,15 @@
 extends layout
+include mixins/_event_detail 
 
 block content
-    .container-fluid.bg-dark.border-top.text-light.p-3
-        h3.container= title
-    .container
-        img.w-100(src=`http://res.cloudinary.com/ddyffgmvq/image/upload/v1661096531/${event.image}.jpg`, alt="Event Image")
-
-        .container
-
-            p= event.event_description
-            p Address: #{event.venue_address}
-            p Country: #{event.country}
-            p Event Starting Date: #{event.event_starting_date}
-            p Event Starting Time: #{event.event_starting_time}
-            hr
-            - const ticket= event.type_of_ticket[0]
-
-            p Tickets: #{ticket}
-
-            if url.startsWith('/all/')
-              hr
-              h3 Fill out  information to purchase tickets for this event
-              .purchase_tickets
-                form(action='/results' method='post')
-                  .input_wrapper
-                    label(for='type_of_ticket') Ticket Type
-                    select(name='type_of_ticket')
-                      option(value='general_admission') General Admission
-                      option(value='vip') V.I.P
-                      option(value='reserved_seating') Reserved Seating
-                      option(value='multi_day_pass') Multi Day Pass
-                      option(value='early_bird_discount') Early Bird Discount
-                      option(value='one_day_pass') One Day Pass
-                  .input_wrapper
-                    label(for='amount')
+  
+  each event in eventData 
+    if url.startsWith('/admin')
+      .container-fluid 
+        a(href=`${event._id}/update`)
+          button(class='btn') Update Event 
+        a(href=`${event._id}/delete`)
+          button(class='btn') Delete Event 
+    //- h1= event.event_name
+    
+    +event(event)

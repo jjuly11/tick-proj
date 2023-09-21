@@ -4,13 +4,13 @@ mixin form()
         form(action="" method="POST" enctype="multipart/form-data")
             .formInput
                 label(for="event_name") Event Name:
-                input(type="text" name="event_name" quantity)
+                input(type="text" name="event_name" required)
             .formInput
-                label(for="event_starting_date") Starting Date:
-                input(type="date" name="event_starting_date" required )
+                label(for="event_start") Starting Date:
+                input(type="date" name="event_start" required )
             .formInput
                 label(for="event_starting_time") Starting Time:
-                input(type="time" name="event_starting_time" required )
+                input(type="time" name="event_start_time" required )
             .formInput
                 label(for="venue_name") Venue Name:
                 input(type="text" name="venue_name" required)
@@ -33,69 +33,69 @@ mixin form()
             .formInput
                 label(for="type_and_quantity") Select The Ticket Types That will be available:
                 br
-                label(for="type_of_ticket") General Admission:
-                input(type="checkbox" name="type_of_ticket" value="general_admission")
+                label(for="ticket_type") General Admission:
+                input(type="checkbox" name="ticket_type" value="general_admission")
                 .hidden_input
-                    label(for="general_admission") Quantity:
-                    input(type="number" name="general_admission" value=0)
-                    label(for="general_admission_cost") Cost:
-                    input(type="number" name="general_admission_cost" value=0)
+                    label(for="ticket_amount") Quantity:
+                    input(type="number" name="ticket_amount" value=null)
+                    label(for="ticket_cost") Cost:
+                    input(type="number" name="ticket_cost" value=null)
                 br
-                label(for="type_of_ticket") VIP:
-                input(type="checkbox" name="type_of_ticket" value="vip")
+                label(for="ticket_type") VIP:
+                input(type="checkbox" name="ticket_type" value="vip")
                 .hidden_input
-                    label(for="vip") Quantity:
-                    input(type="number" name="vip" value=0)
-                    label(for="vip_cost") Cost:
-                    input(type="number" name="vip_cost" value=0)
+                    label(for="ticket_amount") Quantity:
+                    input(type="number" name="ticket_amount" value=null)
+                    label(for="ticket_cost") Cost:
+                    input(type="number" name="ticket_cost" value=null)
                 br
-                label(for="type_of_ticket") Reserved Seating:
-                input(type="checkbox" name="type_of_ticket" value="reserved_seating")
+                label(for="ticket_type") Reserved Seating:
+                input(type="checkbox" name="ticket_type" value="reserved_seating")
                 .hidden_input
-                    label(for="reserved_seating") Quantity:
-                    input(type="number" name="reserved_seating" value=0)
-                    label(for="reserved_seating_cost") Cost:
-                    input(type="number" name="reserved_seating_cost" value=0)
+                    label(for="ticket_amount") Quantity:
+                    input(type="number" name="ticket_amount" value=null)
+                    label(for="ticket_cost") Cost:
+                    input(type="number" name="ticket_cost" value=null)
                 br
-                label(for="type_of_ticket") Multi Day Pass:
-                input(type="checkbox" name="type_of_ticket" value="multi_day_pass")
+                label(for="ticket_type") Multi Day Pass:
+                input(type="checkbox" name="ticket_type" value="multi_day_pass")
                 .hidden_input
-                    label(for="multi_day_pass") Quantity:
-                    input(type="number" name="multi_day_pass" value=0)
-                    label(for="multi_day_pass_cost") Cost:
-                    input(type="number" name="multi_day_pass_cost" value=0)
+                    label(for="ticket_amount") Quantity:
+                    input(type="number" name="ticket_amount" value=null)
+                    label(for="ticket_cost") Cost:
+                    input(type="number" name="ticket_cost" value=null)
                 br
-                label(for="type_and_quantity") Early Bird Discount:
-                input(type="checkbox" name="type_and_quantity" value="early_bird_discount")
+                label(for="ticket_type") Early Bird Discount:
+                input(type="checkbox" name="ticket_type" value="early_bird_discount")
                 .hidden_input
-                    label(for="early_bird_discount") Quantity:
-                    input(type="number" name="early_bird_discount" value=0)
-                    label(for="early_bird_discount_cost") Cost:
-                    input(type="number" name="early_bird_discount_cost" value=0)
+                    label(for="ticket_amount") Quantity:
+                    input(type="number" name="ticket_amount" value=null)
+                    label(for="ticket_cost") Cost:
+                    input(type="number" name="ticket_cost" value=null)
                 br
-                label(for="type_and_quantity") Coded Discount:
-                input(type="checkbox" name="type_and_quantity" value="coded_discount")
+                label(for="ticket_type") Coded Discount:
+                input(type="checkbox" name="ticket_type" value="coded_discount")
                 .hidden_input
-                    label(for="coded_discount") Quantity:
-                    input(type="number" name="coded_discount" value=0)
-                    label(for="coded_discount_cost") Cost:
-                    input(type="number" name="coded_discount_cost" value=0)
+                    label(for="ticket_amount") Quantity:
+                    input(type="number" name="ticket_amount" value=null)
+                    label(for="ticket_cost") Cost:
+                    input(type="number" name="ticket_cost" value=null)
                 br
-                label(for="type_and_quantity") Tickets at Door:
-                input(type="checkbox" name="type_and_quantity" value="tickets_at_door")
+                label(for="ticket_type") Tickets at Door:
+                input(type="checkbox" name="ticket_type" value="tickets_at_door")
                 .hidden_input
-                    label(for="tickets_at_door") Quantity:
-                    input(type="number" name="tickets_at_door" value=0)
-                    label(for="tickets_at_door_cost") Cost:
-                    input(type="number" name="tickets_at_door_cost" value=0)
+                    label(for="ticket_amount") Quantity:
+                    input(type="number" name="ticket_amount" value=null)
+                    label(for="ticket_cost") Cost:
+                    input(type="number" name="ticket_cost" value=null)
                 br
-                label(for="type_and_quantity") One Day Pass:
-                input(type="checkbox" name="type_and_quantity" value="one_day_pass")
+                label(for="ticket_type") One Day Pass:
+                input(type="checkbox" name="ticket_type" value="one_day_pass")
                 .hidden_input
-                    label(for="one_day_pass") Quantity:
-                    input(type="number" name="one_day_pass" value=0)
-                    label(for="one_day_pass_cost") Cost:
-                    input(type="number" name="one_day_pass_cost" value=0)
+                    label(for="ticket_amount") Quantity:
+                    input(type="number" name="ticket_amount" value=null)
+                    label(for="ticket_cost") Cost:
+                    input(type="number" name="ticket_cost" value=null)
             //- Setup For ticket type End
             hr
             .formInput
@@ -105,10 +105,10 @@ mixin form()
                 label(for="event_description") Event Description:
                 textarea(type="text" name="event_description" cols="50" rows="10")
             .formInput
-                label(for="availability") Event Available:
-                input(type="radio", name="availability" value="true" checked)
-                label(for="availibility") Event Unavailable:
-                input(type="radio", name="availability" value="false")
+                label(for="public") Event Available:
+                input(type="radio", name="public" value="true" checked)
+                label(for="public") Event Unavailable:
+                input(type="radio", name="public" value="false")
             .formInput
                 label(for="image") Upload Images:
                 input(type="file" name="image" required)

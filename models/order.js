@@ -4,7 +4,7 @@ const orderSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  hotel_id: {
+  event_id: {
     type: mongoose.Schema.Types.ObjectId,
     required: true
   },
@@ -14,4 +14,4 @@ const orderSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Order', orderSchema);
+module.exports = mongoose.model('Event_Order', orderSchema);

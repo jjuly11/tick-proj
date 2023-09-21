@@ -2,6 +2,7 @@ const Passport= require("passport");
 const User= require("../models/userModel");
 const URLSearchParams= require('url-search-params');
 const Event= require('../models/eventModel');
+const Order = require('../models/order');
 
 const { check, validationResult } = require('express-validator');
 const {sanitize} = require('express-validator/filter');
@@ -88,3 +89,53 @@ exports.logout= (req,res,next) => {
     req.flash('info', 'You Have been Logout');
     res.redirect('/');
 } 
+exports.bookingConfirmation = async (req,res,next) => {
+    try{
+        const data = req.params.data;
+        
+        const parsedData = new URLSearchParams(data);
+        
+        const event = await Event.find({_id: parsedData.get('id') });
+        // res.json(String(parsedData));
+        res.render('confirmation', {title: 'Confirm your Purchase', event, parsedData}); 
+    }catch(err){
+        next(err);
+    }
+}
+exports.orderPlaced= async (req,res,next) => {
+    try{
+        const data= req.params.data;
+        const parsedData= new URLSearchParams(data);
+        const order = new Order({
+            user_id: req.user._id,
+            event_id: parsedData.get('id'),
+            order_details: {
+                amount: parsedData.get('amount'),
+                cost: parsedData.get('ticket_cost'),
+                type: parsedData.get('type_of_ticket')
+            }
+        });
+        await order.save();
+        req.flash('info', 'Thank you for placing a order');
+        res.redirect('/my-account');
+    }catch(err){
+        next(err);
+    }
+}
+
+exports.myAccount= async (req,res,next) => {
+    try{
+        const orders = await Order.aggregate([
+            { $match: {user_id: req.user.id} },
+            { $lookup: {
+                from: 'events',
+                localField: 'event_id',
+                foreignField: '_id',
+                as: 'event_data'
+            } }
+        ]);
+        res.render('my_account', {title: 'My Account', orders});
+    }catch(err){
+        next(err);
+    }
+}

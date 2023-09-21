@@ -1,0 +1,14 @@
+extends layout 
+include mixins/_orders
+
+block content 
+    h2= title 
+    hr
+    .container
+        if user 
+            h3= `Hi, ${user.first_name}!`
+
+            if orders.length > 0
+                h3 Your Tickets: 
+                each order in orders 
+                    +orders(order)

@@ -1,0 +1,74 @@
+mixin event(event, searchQuery)
+    .container-fluid.bg-dark.border-top.text-light.p-3
+        h3.container= event.event_name 
+    .container
+        img.w-100(src=`http://res.cloudinary.com/ddyffgmvq/image/upload/v1661096531/${event.image}.jpg`, alt="Event Image")
+
+        .container
+
+            p= event.event_description
+            p Address: #{event.venue_address}
+            p Country: #{event.country}
+            p Event Starting Date: #{event.event_start}
+            p Event Starting Time: #{event.event_start_time}
+            hr
+            //- - const ticket= event.type_of_ticket[0]
+            
+            each ticket in event.tickets
+                p= ticket.ticket_type 
+                - const name =String(ticket.ticket_type)
+                
+                p= `Amount Available: ${ticket.ticket_amount}`
+            //- p Tickets: #{ticket}
+
+            if url === '/results'
+                .event_order_details
+                    p= `Event Name: ${searchQuery.event_name}`
+                    p= `Event Ticket Type: ${searchQuery.type_of_ticket}`
+                    p= `Amount of Tickets Being Purchased: ${searchQuery.amount}`
+                    p= `Single Ticket Cost: \$${event.ticket_cost}`
+                    - const total_cost= searchQuery.amount * event.ticket_cost 
+                    p= `Total Cost: \$${total_cost}`
+                    
+                    - const query= `id=${event._id}&type_of_ticket=${searchQuery.type_of_ticket}&amount=${searchQuery.amount}`
+                    if url === '/results'
+                        a.button(href=`/confirmation/${query}`) Continue 
+
+            //- Two Different Sections
+            if url.startsWith('/confirmation/')
+                .hotel_order_details 
+                    p= `Event Name: ${event.event_name}`
+                    p= `Event Ticket Type: ${searchQuery.get('type_of_ticket')}`
+                    p= `Amount of Tickets Being Purchased: ${searchQuery.get('amount')}`
+                    p= `Single Ticket Cost: \$ ${event.get('ticket_cost')}`
+                    - const total_cost= searchQuery.get('amount') * event.get('ticket_cost')
+                    p= `Total Cost: ${total_cost}`
+                    
+                    - const query= `id=${event._id}&type_of_ticket=${searchQuery.get('type_of_ticket')}&amount=${searchQuery.get('amount')}`
+                    if user 
+                        a.button(href=`/order-placed/${query}`) Place your Order! 
+                    else
+                        a.button(href='/login') Please Login to Place Order 
+           
+            if url.startsWith('/all/')
+              hr
+              h3 Fill out  information to purchase tickets for this event
+              .purchase_tickets
+                form(action="/results" method="post")
+                    .input_wrapper 
+                        label(for="event_name") Event Name: 
+                        input(type="text" name="event_name" value=event.event_name) 
+                    .input_wrapper
+                        label(for='ticket_type') Ticket Type
+                        select(name='ticket_type')
+                            option(value='general_admission') General Admission
+                            option(value='vip') V.I.P
+                            option(value='reserved_seating') Reserved Seating
+                            option(value='multi_day_pass') Multi Day Pass
+                            option(value='early_bird_discount') Early Bird Discount
+                            option(value='one_day_pass') One Day Pass
+                    .input_wrapper
+                        label(for='amount') Amount of tickets needed: 
+                        input(name="amount" type='number')
+                    .input_wrapper 
+                        button(type="submit") Submit
