@@ -40,5 +40,8 @@ router.get('/my-account', userController.myAccount);
 
 // Testing Routes
 router.get('/test', controller.event_test);
+router.get('/message', (req,res) => {
+    res.send(req.flash('test'));
+})
 
 module.exports = router;

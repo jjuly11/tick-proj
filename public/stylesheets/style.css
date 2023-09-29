@@ -12,3 +12,6 @@ body {
   height: 100%;
   /* width: 110% !important; */
 }
+.hidden{
+  display: none;
+}

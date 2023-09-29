@@ -23,8 +23,8 @@ var app = express();
 // Sessions start
 app.use(session({
   secret: process.env.SECRET,
-  saveUninitialized: false,
-  resave: false,
+  saveUninitialized: true,
+  resave: true,
   // saveUninitialized: false,
   store: MongoStore.create({
     mongoUrl: process.env.DB,
@@ -48,7 +48,7 @@ app.use( (req,res,next) => {
   res.locals.user = req.user;
   // console.log('req.user');
   res.locals.url = req.path;
-  res.locals.flash = req.flash();
+  res.locals.flash = req.flash(),
   next();
 } );
 // Custom middleware end

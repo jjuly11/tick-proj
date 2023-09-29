@@ -126,7 +126,7 @@ exports.addEventPost= async (req,res,next) => {
         })
 
 
-        console.log(event);
+        // console.log(event);
         // const event = new Event(req.body);
         await event.save();
         req.flash('success', `Event ${event.event_name} created successfully`);
@@ -161,9 +161,10 @@ exports.searchResults = async (req,res,next) => {
         const searchQuery = req.body;
         // const vara= 'tes';
         // res.send(req.body);
+        // req.flash('error', )
         const searchData = await Event.aggregate([
             { $match: { $text: {$search: `\"${searchQuery.event_name}\"`} } },
-            { $match: {availability: true} }
+            { $match: {public: true} }
 
         ]);
         // res.json(searchData);
@@ -179,6 +180,8 @@ exports.searchResults = async (req,res,next) => {
 
 exports.event_test = async (req,res,next) => {
     try{
+        req.flash('test', `Successfully redirected`);
+        res.redirect('/message');
         // const test= new Test({
         //     event_name: "my event",
         //     event_host: 'My Host',
@@ -203,8 +206,8 @@ exports.event_test = async (req,res,next) => {
         //     ]
         // });
         // await test.save();
-        const result= await Test.find();
-        res.render('test_page', {title: "Test Page", result});
+        // const result= await Test.find();
+        // res.render('test_page', {title: "Test Page", result});
     }catch(err){
         next(err);
     }

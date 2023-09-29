@@ -24,14 +24,27 @@ mixin event(event, searchQuery)
             if url === '/results'
                 .event_order_details
                     p= `Event Name: ${searchQuery.event_name}`
-                    p= `Event Ticket Type: ${searchQuery.type_of_ticket}`
+                    p= `Event Ticket Type: ${searchQuery.ticket_type}`
                     p= `Amount of Tickets Being Purchased: ${searchQuery.amount}`
-                    p= `Single Ticket Cost: \$${event.ticket_cost}`
-                    - const total_cost= searchQuery.amount * event.ticket_cost 
-                    p= `Total Cost: \$${total_cost}`
+                    //- - let not_enough=0
+                    //- - let str2 = searchQuery.ticket_type
+                    each ticket in event.tickets 
+                        //- - let str1 = ticket.ticket_type
+                        //- h1=str2
+                        if ticket.ticket_type == searchQuery.ticket_type 
+                            if searchQuery.amount >= ticket.ticket_amount 
+                                p.bg-danger Not Enough Tickets
+                                - let not_enough=1
+                            else 
+                                p= `Single Ticket Cost: \$${ticket.ticket_cost}`
+                                - const total_cost= searchQuery.amount * ticket.ticket_cost 
+                                p= `Total Cost: \$${total_cost}`
+                            p= not_enough
+                    - const query= `id=${event._id}&type_of_ticket=${searchQuery.ticket_type}&amount=${searchQuery.amount}`
+                    //- Needs Fixing
+                    //- console.log(not_enough)
                     
-                    - const query= `id=${event._id}&type_of_ticket=${searchQuery.type_of_ticket}&amount=${searchQuery.amount}`
-                    if url === '/results'
+                    if (url === '/results' && not_enough==0)
                         a.button(href=`/confirmation/${query}`) Continue 
 
             //- Two Different Sections
@@ -52,6 +65,7 @@ mixin event(event, searchQuery)
            
             if url.startsWith('/all/')
               hr
+              a.btn(href="/test") Testing
               h3 Fill out  information to purchase tickets for this event
               .purchase_tickets
                 form(action="/results" method="post")
