@@ -32,20 +32,22 @@ mixin event(event, searchQuery)
                         //- - let str1 = ticket.ticket_type
                         //- h1=str2
                         if ticket.ticket_type == searchQuery.ticket_type 
-                            if searchQuery.amount >= ticket.ticket_amount 
+                            if searchQuery.amount > ticket.ticket_amount 
                                 p.bg-danger Not Enough Tickets
-                                - let not_enough=1
+                                a.button(href=`/all/${event._id}`) Go Back      
                             else 
                                 p= `Single Ticket Cost: \$${ticket.ticket_cost}`
                                 - const total_cost= searchQuery.amount * ticket.ticket_cost 
                                 p= `Total Cost: \$${total_cost}`
-                            p= not_enough
-                    - const query= `id=${event._id}&type_of_ticket=${searchQuery.ticket_type}&amount=${searchQuery.amount}`
+                                - const query= `id=${event._id}&type_of_ticket=${searchQuery.ticket_type}&amount=${searchQuery.amount}&ticket_cost=${ticket.ticket_cost}&total_cost=${total_cost}`
+                                a.button(href=`/confirmation/${query}`) Continue
                     //- Needs Fixing
                     //- console.log(not_enough)
                     
-                    if (url === '/results' && not_enough==0)
-                        a.button(href=`/confirmation/${query}`) Continue 
+                    //- Was checking to see if I was in the correct place
+                    //- if (url === '/results')
+                        //- console.log(not_enough)
+                        //- a.button(href=`/confirmation/${query}`) Continue 
 
             //- Two Different Sections
             if url.startsWith('/confirmation/')
@@ -53,11 +55,11 @@ mixin event(event, searchQuery)
                     p= `Event Name: ${event.event_name}`
                     p= `Event Ticket Type: ${searchQuery.get('type_of_ticket')}`
                     p= `Amount of Tickets Being Purchased: ${searchQuery.get('amount')}`
-                    p= `Single Ticket Cost: \$ ${event.get('ticket_cost')}`
-                    - const total_cost= searchQuery.get('amount') * event.get('ticket_cost')
-                    p= `Total Cost: ${total_cost}`
+                    p= `Single Ticket Cost: \$ ${searchQuery.get('ticket_cost')}`
+                    //- - const total_cost= searchQuery.get('amount') * event.get('ticket_cost')
+                    p= `Total Cost: ${searchQuery.get('total_cost')}`
                     
-                    - const query= `id=${event._id}&type_of_ticket=${searchQuery.get('type_of_ticket')}&amount=${searchQuery.get('amount')}`
+                    - const query= `id=${event._id}&type_of_ticket=${searchQuery.get('type_of_ticket')}&amount=${searchQuery.get('amount')}&ticket_cost=${searchQuery.get('ticket_cost')}&total_cost=${searchQuery.get('total_cost')}`
                     if user 
                         a.button(href=`/order-placed/${query}`) Place your Order! 
                     else

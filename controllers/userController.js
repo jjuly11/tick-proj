@@ -8,6 +8,7 @@ const { check, validationResult } = require('express-validator');
 const {sanitize} = require('express-validator/filter');
 // const { findByIdAndUpdate } = 
 const compression = require('compression');
+const { json } = require("body-parser");
 
 // Login Section
 
@@ -96,7 +97,7 @@ exports.bookingConfirmation = async (req,res,next) => {
         const parsedData = new URLSearchParams(data);
         
         const event = await Event.find({_id: parsedData.get('id') });
-        // res.json(String(parsedData));
+        // res.json(json(parsedData));
         res.render('confirmation', {title: 'Confirm your Purchase', event, parsedData}); 
     }catch(err){
         next(err);
@@ -115,6 +116,7 @@ exports.orderPlaced= async (req,res,next) => {
                 type: parsedData.get('type_of_ticket')
             }
         });
+        console.log(order);
         await order.save();
         req.flash('info', 'Thank you for placing a order');
         res.redirect('/my-account');
