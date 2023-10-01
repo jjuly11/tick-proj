@@ -107,6 +107,29 @@ exports.orderPlaced= async (req,res,next) => {
     try{
         const data= req.params.data;
         const parsedData= new URLSearchParams(data);
+
+        var myquery = { _id: parsedData.get('id') };
+        const event = await Event.findOne(myquery);
+        
+
+        for(var i=0 ; i < (event.tickets).length ; i++ ){
+            // res.send('event spot');
+            if(event.tickets[i].ticket_type == parsedData.get('type_of_ticket')){ 
+                var difference = String(event.tickets[i].ticket_amount - Number( parsedData.get('amount') ) );
+                
+                // console.log(difference);
+
+                var change = await Event.updateOne(
+                    {myquery, "tickets.ticket_type": parsedData.get('type_of_ticket')},
+                    { $set: {"tickets.$.ticket_amount": difference} }
+                );
+                console.log(change);
+            }
+            
+        }
+        // res.send(event);
+        
+
         const order = new Order({
             user_id: req.user._id,
             event_id: parsedData.get('id'),
