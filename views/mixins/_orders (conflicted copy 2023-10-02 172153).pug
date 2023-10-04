@@ -1,0 +1,10 @@
+mixin orders(order)
+
+    .container-fluid
+        ul
+            li= `Order ref: ${order._id}`
+            each data in order.event_data 
+                li=`Event: ${data.event_name}`
+                li=`Country: ${data.country}`
+                li=`Ticket Type: ${order.order_details.type}`
+                li=`Amount Purchased: ${order.order_details.amount}`

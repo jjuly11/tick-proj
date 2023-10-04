@@ -108,21 +108,38 @@ exports.orderPlaced= async (req,res,next) => {
         const data= req.params.data;
         const parsedData= new URLSearchParams(data);
 
-        var myquery = { _id: parsedData.get('id') };
-        const event = await Event.findOne(myquery);
+        
+        const event = await Event.findOne({ _id: parsedData.get('id'), "tickets.ticket_type": parsedData.get('type_of_ticket') });
         
 
         for(var i=0 ; i < (event.tickets).length ; i++ ){
             // res.send('event spot');
             if(event.tickets[i].ticket_type == parsedData.get('type_of_ticket')){ 
                 var difference = String(event.tickets[i].ticket_amount - Number( parsedData.get('amount') ) );
-                
-                // console.log(difference);
+                // console.log("Inside If Statement");
+                // console.log(event.tickets[i].ticket_type);
 
                 var change = await Event.updateOne(
-                    {myquery, "tickets.ticket_type": parsedData.get('type_of_ticket')},
+                    { _id: parsedData.get('id'), "tickets.ticket_type": parsedData.get('type_of_ticket') },
                     { $set: {"tickets.$.ticket_amount": difference} }
+                    // Not working, think it may be the condition portion
+                    // { $cond: 
+                    //     {
+                    //         if:{ $lt: [difference, 1] },
+                    //         then: {$set : {"tickets.$.available": false }},
+                    //         else: {$set : {"tickets.$.available": true }}
+                            
+                    //     }
+                    // }
                 );
+                if(difference == 0){
+                    console.log( await Event.updateOne(
+                            { _id: parsedData.get('id'), "tickets.ticket_type": parsedData.get('type_of_ticket') },
+                            { $set: {"tickets.$.available": false} }
+                        )
+                    );
+                }
+
                 console.log(change);
             }
             
@@ -140,7 +157,9 @@ exports.orderPlaced= async (req,res,next) => {
             }
         });
         console.log(order);
+        
         await order.save();
+
         req.flash('info', 'Thank you for placing a order');
         res.redirect('/my-account');
     }catch(err){
@@ -159,6 +178,7 @@ exports.myAccount= async (req,res,next) => {
                 as: 'event_data'
             } }
         ]);
+        // console.log(orders);
         res.render('my_account', {title: 'My Account', orders});
     }catch(err){
         next(err);
