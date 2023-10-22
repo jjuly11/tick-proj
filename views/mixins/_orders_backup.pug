@@ -6,5 +6,5 @@ mixin orders(order)
             each data in order.event_data 
                 li=`Event: ${data.event_name}`
                 li=`Country: ${data.country}`
-                li=`Ticket Type: ${order.order_details.type}`
-                li=`Amount Purchased: ${order.order_details.amount}`
+                li=`Ticket Type: ${data.order_details.type}`
+                li=`Amount Purchased: ${data.order_details.amount}`
